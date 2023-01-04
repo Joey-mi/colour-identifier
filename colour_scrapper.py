@@ -5,11 +5,11 @@ import re
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 # from selenium.webdriver.chrome.service import Service
 # from webdriver_manager.chrome import ChromeDriverManager
 
 # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-driver = webdriver.Chrome()
 
 #from bs4 import BeautifulSoup
 
@@ -17,8 +17,14 @@ def extract_site(url):
     intermediate_colours = []
     colour = []
 
-    print('Locating website...')
+    driver_exe = 'chromedriver'
+    options = Options()
+    options.add_argument("--headless")
+
+    driver = webdriver.Chrome(driver_exe, options=options)
     driver.get(url)
+    #print('Locating website...')
+    #driver.get(url)
 
     print(driver.page_source)
     all_elem = driver.find_elements(By.CSS_SELECTOR, '*')
@@ -76,31 +82,9 @@ def extract_site(url):
     [result.append(x) for x in colour if x not in result]
     return result
 
-# def eliminate_duplicates(an_arr):
-#     match len(an_arr):
-#         case 0 | 1:
-#             return an_arr
-#         case _:
-#             first = an_arr[:len(an_arr)//2]
-#             second = an_arr[len(an_arr)//2:]
-
-#             result = []
-#             recurse_through = []
-
-#             if len(first) > len(second):
-#                 recurse_through = first
-#             else:
-#                 recurse_through = second
-            
-#             counter = 0
-#             for elem in recurse_through:
-#                 if 
-
-
-
-    
-
 cnt = extract_site('https://weirdorconfusing.com/')
+
+#cnt = extract_site(driver.current_url)
 print(cnt)
 
 
