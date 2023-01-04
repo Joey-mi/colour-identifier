@@ -13,11 +13,10 @@ driver = webdriver.Chrome()
 
 #from bs4 import BeautifulSoup
 
-content = ''
-intermediate_colours = []
-colour = []
-
 def extract_site(url):
+    intermediate_colours = []
+    colour = []
+
     print('Locating website...')
     driver.get(url)
 
@@ -44,15 +43,9 @@ def extract_site(url):
         intermediate_colours.append(elem.value_of_css_property('outline'))
         intermediate_colours.append(elem.value_of_css_property('text-decoration'))
         intermediate_colours.append(elem.value_of_css_property('text-decoration-color'))
-        #str.startsWith(str)
-        #.string.splt(" ")
 
-    #print(' ')
-    #print(intermediate_colours)
     print(' ')
     for all_text in intermediate_colours:
-        #i = 0
-        #re.split('(\d+)', string)
         just_colour = ''
 
         if type(all_text) is not tuple:
@@ -62,8 +55,7 @@ def extract_site(url):
             for splits in split_by_parentheses:
                 isolate_colour = isolate_colour + re.split('rgb', splits)
             
-            
-            #count = 0
+
             for elem in isolate_colour:
                 
                 elem = elem + ')'
@@ -74,15 +66,41 @@ def extract_site(url):
                 for items in eliminate_space:
                     complete = complete + items
 
-                print(complete)
-
                 if re.search(pattern = "rgb\(\s*(?:(\d{1,3})\s*,?){3}\)", string = complete): 
                     just_colour = complete
                     colour.append(just_colour)
                 elif re.search(pattern = "rgba\(\s*(?:(\d{1,3})\s*,?){4}\)", string = complete):
                     just_colour = complete
                     colour.append(just_colour)
-                #count = count + 1
+    result = []
+    [result.append(x) for x in colour if x not in result]
+    return result
 
-    print(colour)
+# def eliminate_duplicates(an_arr):
+#     match len(an_arr):
+#         case 0 | 1:
+#             return an_arr
+#         case _:
+#             first = an_arr[:len(an_arr)//2]
+#             second = an_arr[len(an_arr)//2:]
+
+#             result = []
+#             recurse_through = []
+
+#             if len(first) > len(second):
+#                 recurse_through = first
+#             else:
+#                 recurse_through = second
+            
+#             counter = 0
+#             for elem in recurse_through:
+#                 if 
+
+
+
+    
+
 cnt = extract_site('https://weirdorconfusing.com/')
+print(cnt)
+
+
