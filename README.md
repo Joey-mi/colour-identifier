@@ -8,7 +8,7 @@ The UI or chrome extension is being developed in the 'the-interface' branch as a
 ## Setup
 As the script isn't connected to the chrome extension project in 'the-interface' branch the setup instructions will be found in the 'colour-pyscript' branch.
 
-##Limitations
+## Limitations
 - Only supports google chrome
 - Only tested on a windows OS
 - Need to have a google chrome tab open before running the project
