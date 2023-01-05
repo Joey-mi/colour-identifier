@@ -1,4 +1,5 @@
-# Colour Scrapper
+# Colour Scrapper 
+## To see more please travel to the 'colour-pyscript' branch or 'the-interface' branch
 ## Description
 This project will scrape all colours in a webpage and display it for the user as a chrome extension. Still a WIP right now and while buggy only the code in the 'colour-pyscript' branch can be used at the moment. 
 
