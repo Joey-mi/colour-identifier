@@ -1,17 +1,11 @@
-#import requests
-# import cssutils
-#from urllib.parse import urljoin
 import re
+from pywinauto import Application
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-# from selenium.webdriver.chrome.service import Service
-# from webdriver_manager.chrome import ChromeDriverManager
-
-# driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-
-#from bs4 import BeautifulSoup
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 def extract_site(url):
     intermediate_colours = []
@@ -82,9 +76,16 @@ def extract_site(url):
     [result.append(x) for x in colour if x not in result]
     return result
 
-cnt = extract_site('https://weirdorconfusing.com/')
+#driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+app = Application(backend='uia')
+app.connect(title_re=".*Chrome.*")
+element_name="Address and search bar"
+dlg = app.top_window()
+url = dlg.child_window(title=element_name, control_type="Edit").get_value()
 
-#cnt = extract_site(driver.current_url)
+#cnt = extract_site('https://weirdorconfusing.com/')
+
+cnt = extract_site(url)
 print(cnt)
 
 

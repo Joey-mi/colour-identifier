@@ -1,0 +1,3 @@
+[submodule "pybrinf"]
+	path = pybrinf
+	url = https://github.com/manucabral/pybrinf
