@@ -7,6 +7,28 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
+# ttps://stackoverflow.com/questions/3173320/text-progress-bar-in-terminal-with-block-characters
+def colourProgressBar(iteration, total, prefix='', suffix='', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
+    """
+    Call in a loop to create terminal progress bar
+    @params:
+        iteration   - Required  : current iteration (Int)
+        total       - Required  : total iterations (Int)
+        prefix      - Optional  : prefix string (Str)
+        suffix      - Optional  : suffix string (Str)
+        decimals    - Optional  : positive number of decimals in percent complete (Int)
+        length      - Optional  : character length of bar (Int)
+        fill        - Optional  : bar fill character (Str)
+        printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
+    """
+    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
+    filledLength = int(length * iteration // total)
+    bar = fill * filledLength + '-' * (length - filledLength)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end = printEnd)
+    # Print newline on complete
+    if iteration == total:
+        print()
+
 def extract_site(url):
     intermediate_colours = []
     colour = []
@@ -20,8 +42,14 @@ def extract_site(url):
     #print('Locating website...')
     #driver.get(url)
 
-    print(driver.page_source)
+    # print(driver.page_source)
+
     all_elem = driver.find_elements(By.CSS_SELECTOR, '*')
+    total_selectors_with_colours = len(all_elem)
+    i = 0
+
+    print("Analyzing css properties: ")
+    colourProgressBar(0, total_selectors_with_colours, prefix = 'Progress:', suffix = 'Complete', length = 50)
     for elem in all_elem:
         intermediate_colours.append(elem.value_of_css_property('color'))
         intermediate_colours.append(elem.value_of_css_property('background'))
@@ -43,8 +71,16 @@ def extract_site(url):
         intermediate_colours.append(elem.value_of_css_property('outline'))
         intermediate_colours.append(elem.value_of_css_property('text-decoration'))
         intermediate_colours.append(elem.value_of_css_property('text-decoration-color'))
+        colourProgressBar(i + 1, total_selectors_with_colours, prefix = 'Progress:', suffix = 'Complete', length = 50)
+        i = i + 1
 
     print(' ')
+
+    all_properties = len(intermediate_colours)
+
+    print("Parsing colours: ")
+    colourProgressBar(0, all_properties, prefix = 'Progress:', suffix = 'Complete', length = 50)
+    i = 0
     for all_text in intermediate_colours:
         just_colour = ''
 
@@ -72,6 +108,8 @@ def extract_site(url):
                 elif re.search(pattern = "rgba\(\s*(?:(\d{1,3})\s*,?){4}\)", string = complete):
                     just_colour = complete
                     colour.append(just_colour)
+        colourProgressBar(i + 1, all_properties, prefix = 'Progress:', suffix = 'Complete', length = 50)
+        i = i + 1
     result = []
     [result.append(x) for x in colour if x not in result]
     return result
