@@ -11,8 +11,6 @@ following this website [https://www.digitalocean.com/community/tutorials/install
 
 3. Clone this git repository.
 
-4. Type: python 
-
 ## How to run project
 After cloning the repository cd the file path to reach the root folder of the repository and use the terminal/command line and run the command python colour_scrapper.py.
 
@@ -22,6 +20,5 @@ After cloning the repository cd the file path to reach the root folder of the re
 - Need to have a google chrome tab open before running the project
 
 ## Current Problems
-- Requires and indicator that it's running
 - Slow
 
