@@ -1,14 +1,27 @@
-# Colour Scrapper 
-## To see more please travel to the 'colour-pyscript' branch or 'the-interface' branch
-## Description
-This project will scrape all colours in a webpage and display it for the user as a chrome extension. Still a WIP right now and while buggy only the code in the 'colour-pyscript' branch can be used at the moment. 
+# Colour Identifier
 
-The UI or chrome extension is being developed in the 'the-interface' branch as a react project while the python script is located in the 'colour-pyscript' branch but will include a javascript version in the future so it can be used in a chrome extension.
+## Description
+A python script that obtains all the colours used in the active webpage in rgb or rgba format and puts it in a string list.
 
 ## Setup
-As the script isn't connected to the chrome extension project in 'the-interface' branch the setup instructions will be found in the 'colour-pyscript' branch.
+1. This project is still in development and relies on the Python interpreter. To run this project it's suggested to download the interpreter
+following this website [https://www.digitalocean.com/community/tutorials/install-python-windows-10](https://www.digitalocean.com/community/tutorials/install-python-windows-10) for download instructions.
+
+2. This project also uses libraries like Python Selenium and pywinauto. To download these libraries execute the commands 'pip install selenium' and 'pip install pywinauto' in the command line.
+
+3. Clone this git repository.
+
+4. Type: python 
+
+## How to run project
+After cloning the repository cd the file path to reach the root folder of the repository and use the terminal/command line and run the command python colour_scrapper.py.
 
 ## Limitations
 - Only supports google chrome
 - Only tested on a windows OS
 - Need to have a google chrome tab open before running the project
+
+## Current Problems
+- Requires and indicator that it's running
+- Slow
+
