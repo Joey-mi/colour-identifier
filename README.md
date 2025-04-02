@@ -19,6 +19,3 @@ After cloning the repository cd the file path to reach the root folder of the re
 - Only tested on a windows OS
 - Need to have a google chrome tab open before running the project
 
-## Current Problems
-- Slow
-
